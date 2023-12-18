@@ -4,13 +4,7 @@ varying vec2 vUv;
 varying float vElevation;
 
 void main() {
-    vec3 color;
     float shade = vElevation * 2.0 + 0.8;
-    if (vUv.y < 0.5) {
-        color = uColor[0];
-    } else {
-        color = uColor[1];
-    }
-
+    vec3 color = mix(uColor[0], uColor[1], step(0.5, vUv.y));
     gl_FragColor = vec4(color * shade, 1.0);
 }
